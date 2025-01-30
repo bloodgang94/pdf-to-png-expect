@@ -1,0 +1,53 @@
+{
+	"name": "@rowi-test/pdf-to-png-expect",
+	"version": "1.0.0",
+	"description": "pdf-to-png-expect",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js",
+			"default": "./index.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"publishConfig": {
+		"@rowi-test:registry": "https://gitlab.service.rowi.tech/api/v4/projects/591/packages/npm/"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"prepare": "husky"
+	},
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"author": "a.sotskov",
+	"license": "ISC",
+	"devDependencies": {
+		"@eslint/js": "^9.19.0",
+		"@types/node": "^20.12.7",
+		"@typescript-eslint/eslint-plugin": "^8.22.0",
+		"@typescript-eslint/parser": "^8.22.0",
+		"eslint": "^9.19.0",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-prettier": "^5.2.3",
+		"globals": "^15.14.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^15.4.3",
+		"prettier": "3.4.2",
+		"tsup": "^8.0.2",
+		"typescript-eslint": "^8.22.0"
+	},
+	"dependencies": {
+		"@playwright/test": "^1.50.0",
+		"dotenv": "^16.4.7",
+		"kafkajs": "^2.2.4",
+		"pdf-to-png-converter": "^3.6.4",
+		"typescript": "^5.7.3"
+	}
+}

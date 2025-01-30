@@ -1,0 +1,16 @@
+image: gitlab.service.rowi.tech:80/global/base-images/node:21.6.1-alpine3.19-190224
+
+stages:
+  - publish
+
+publish-npm:
+  stage: publish
+  script:
+   - npm i
+   - npm run build
+   - echo "@rowi-test:registry=https://${CI_SERVER_HOST}/api/v4/npm/" > .npmrc
+   - echo "${CI_API_V4_URL#https?}/packages/npm/:_authToken=${CI_TOKEN}" >> .npmrc
+   - echo "${CI_API_V4_URL#https?}/projects/591/packages/npm/:_authToken=${CI_TOKEN}" >> .npmrc
+   - echo `cat .npmrc`
+   - npm publish
+
