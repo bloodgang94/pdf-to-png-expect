@@ -1,6 +1,6 @@
 {
 	"name": "@rowi-test/pdf-to-png-expect",
-	"version": "1.0.0",
+	"version": "1.0.3",
 	"description": "pdf-to-png-expect",
 	"homepage": "https://github.com/bloodgang94/pdf-to-png-expect#readme",
 	"bugs": {
