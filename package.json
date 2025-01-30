@@ -14,9 +14,6 @@
 		},
 		"./package.json": "./package.json"
 	},
-	"publishConfig": {
-		"@rowi-test:registry": "https://gitlab.service.rowi.tech/api/v4/projects/591/packages/npm/"
-	},
 	"scripts": {
 		"build": "tsup",
 		"dev": "tsup --watch",
