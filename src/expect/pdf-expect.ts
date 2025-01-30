@@ -1,7 +1,6 @@
 import { expect as baseExpect } from "@playwright/test";
 import type { Page } from "@playwright/test";
 import { PngPageOutput } from "pdf-to-png-converter";
-export { test } from "@playwright/test";
 
 export const expect = baseExpect.extend({
 	/**

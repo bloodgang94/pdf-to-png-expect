@@ -10,7 +10,7 @@ export interface PdfCompareOptions {
 	pdfCompareOptions: PdfToPngOptions;
 }
 
-export const pdfCompareFixture = base.extend<PdfCompareFixture & PdfCompareOptions>({
+export const test = base.extend<PdfCompareFixture & PdfCompareOptions>({
 	pdfCompareOptions: [
 		{
 			disableFontFace: true,
