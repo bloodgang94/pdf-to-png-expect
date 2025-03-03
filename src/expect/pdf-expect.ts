@@ -1,56 +1,45 @@
-import { expect as baseExpect } from "@playwright/test";
-import type { Page } from "@playwright/test";
-import { PngPageOutput } from "pdf-to-png-converter";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { comparePdfToSnapshot } from "@/core/compare-pdf-to-snapshot";
+import { expect as baseExpect, test as baseTest } from "@playwright/test";
+import { CompareOptions } from "@/types";
 
 export const expect = baseExpect.extend({
-	/**
-	 * Compares the request body with json
-	 *
-	 * **Usage**
-	 *
-	 * ```js
-	 * const pngPages = await pngToPdf.convert(await res.body());
-	 *   for (const pngPage of pngPages) await expect.soft(page).toHavePngSnapshot(pngPage);
-	 * ```
-	 * @param {Object} page - Page playwright.
-	 * @param {Object} pngPage - page PngPageOutput
-	 * @param {Object} options - options
-	 */
-	async toHavePngSnapshot(
-		page: Page,
-		pngPage: PngPageOutput,
-		options?: {
+	async toMatchPdfSnapshot(
+		pdf: string | Buffer,
+		options?: CompareOptions & {
 			maxDiffPixelRatio?: number;
 			maxDiffPixels?: number;
 			name?: string | Array<string>;
 			threshold?: number;
 		}
 	) {
-		const assertionName = "toHavePngSnapshot";
-		let pass: boolean;
+		const assertionName = "toMatchPdfSnapshot";
+		let pass = true;
+		const testInfo = baseTest.info();
+		const projectOptions = (testInfo.project.use as any).pdfToPng as CompareOptions;
 
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const snapshotName = testInfo.title.split(" ").join("_");
 		let matcherResult: any;
-		try {
-			await page.setViewportSize({ width: Math.round(pngPage.width), height: Math.round(pngPage.height) });
-			await page.goto("file:///" + pngPage.path, { waitUntil: "load" });
-			baseExpect(await page.locator("//img").screenshot()).toMatchSnapshot(options);
 
-			pass = true;
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		try {
+			const array = await comparePdfToSnapshot(pdf, snapshotName, { ...projectOptions, ...options });
+			for (const pngPage of array) {
+				baseExpect.soft(pngPage.content).toMatchSnapshot(options);
+			}
 		} catch (e: any) {
-			matcherResult = e.matcherResult;
+			matcherResult = e.matcherResult ?? e;
 			pass = false;
 		}
 
-		const message = () => matcherResult.message;
+		const message = () => matcherResult;
 
 		return {
 			message,
 			pass,
 			name: assertionName,
-			pngPage,
 			actual: matcherResult?.actual,
 		};
 	},
 });
+
+export * from "@playwright/test";
