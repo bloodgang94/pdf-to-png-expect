@@ -1,7 +1,8 @@
 import path from "path";
 import { DocumentInitParameters } from "pdfjs-dist/types/src/display/api";
+import * as pdfjs from "pdfjs-dist";
 
-const PDFJS_DIR = path.join(path.dirname(require.resolve("pdfjs-dist")), "..");
+const PDFJS_DIR = path.join(path.dirname(pdfjs.GlobalWorkerOptions.workerSrc), "..");
 
 export const DOCUMENT_INIT_PARAMS_DEFAULTS: DocumentInitParameters = {
 	standardFontDataUrl: path.join(PDFJS_DIR, "standard_fonts/"),
