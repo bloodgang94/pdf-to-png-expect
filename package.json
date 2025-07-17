@@ -1,6 +1,6 @@
 {
 	"name": "@rowi-test/pdf-to-png-expect",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "pdf-to-png-expect",
 	"homepage": "https://github.com/bloodgang94/pdf-to-png-expect#readme",
 	"bugs": {
@@ -10,15 +10,20 @@
 		"type": "git",
 		"url": "git+https://github.com/bloodgang94/pdf-to-png-expect.git"
 	},
-	"main": "dist/index.js",
-	"module": "dist/index.mjs",
-	"types": "dist/index.d.ts",
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js",
-			"default": "./index.js"
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.mjs"
+			},
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			},
+			"default": "./dist/index.mjs"
 		},
 		"./package.json": "./package.json"
 	},
@@ -50,7 +55,7 @@
 	},
 	"dependencies": {
 		"@napi-rs/canvas": "^0.1.67",
-		"@playwright/test": "^1.50.0",
+		"@playwright/test": "^1.54.1",
 		"dotenv": "^16.4.7",
 		"jimp": "^1.6.0",
 		"pdfjs-dist": "^4.10.38",
